@@ -11,8 +11,11 @@
       desc: '点击进入播放',
       title: '派发了一段语音'
     }
-    wechat('friend', wxData)
-    wechat('timeline', wxData)
+    var wxCallback = function(res){
+      alert(JSON.stringify(res))
+    }
+    wechat('friend', wxData, wxCallback)
+    wechat('timeline', wxData, wxCallback)
 
     $(function(){
       var $form = $('#form-voice')
