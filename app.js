@@ -7,7 +7,7 @@
     var shareUrl = 'http://fritx.github.io/voice'
     var shareDesc = '将文字以语音的形式派发给朋友'
     var shareTitle = '语音派发'
-    
+
     var wxGetData = function(){
       return {
         //appId: '',
@@ -44,7 +44,7 @@
           return
         }
         var url = [
-          'http://voice.coding.io/?t=', text
+          'http://voice.coding.io/v.mp3?t=', text
         ].join('')
 
         $link.text(url)
