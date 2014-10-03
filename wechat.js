@@ -73,7 +73,7 @@
     // 当 WeixinJSBridge 存在则直接绑定事件
     WeixinJSBridge.on(this.map.events[name], function() {
       var data = getData() || {}
-      data = this._data(data)
+      data = that._data(data)
 
       // 分享到微博的接口不同
       if(name === 'weibo') {
