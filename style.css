@@ -14,10 +14,3 @@ body.ready {
 #output-link {
   word-break: break-all;
 }
-
-#audio-box {
-  opacity: 0.8;
-}
-#audio-box.ready {
-  opacity: 1;
-}

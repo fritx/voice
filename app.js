@@ -52,13 +52,11 @@
         shareDesc = '点击进入播放'
         shareTitle = '派发了一段语音'
 
-        var $audio = $('<audio controls autoplay>')
-          .attr('type', 'audio/mpeg')
-          .on('canplay', function(){
-            $audioBox.addClass('ready')
-          })
-          .attr('src', url)
-          .appendTo($audioBox)
+        var $audio = $([
+          '<audio controls autoplay>',
+            '<source type="audio/mpeg" src="', url, '">',
+          '</audio>'
+        ].join('')).appendTo($audioBox)
       })
 
       $('body').addClass('ready')
