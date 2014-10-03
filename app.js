@@ -4,12 +4,22 @@
   init()
 
   function init() {
+    var shareUrl = 'http://fritx.github.io/voice'
+    var shareDesc = '将文字以语音的形式派发给朋友'
+    var shareTitle = '语音派发'
+
     var wxData = {
       //appId: '',
-      imgUrl: 'http://fritx.github.io/voice/logo.jpg',
-      link: 'http://fritx.github.io/voice',
-      desc: '点击进入播放',
-      title: '派发了一段语音'
+      img: 'http://fritx.github.io/voice/logo.jpg',
+      link: function(){
+        return shareUrl
+      },
+      desc: function(){
+        return shareDesc
+      },
+      title: function(){
+        return shareTitle
+      }
     }
     var wxCallback = function(res){
       alert(JSON.stringify(res))
@@ -31,12 +41,20 @@
         $audioBox.empty().removeClass('ready')
 
         var text = $text.val()
+        if (!text.trim()) {
+          shareUrl = 'http://fritx.github.io/voice'
+          shareDesc = '将文字以语音的形式派发给朋友'
+          shareTitle = '语音派发'
+          return
+        }
         var url = [
           'http://voice.coding.io/?t=', text
         ].join('')
 
         $link.text(url)
-        wxData.link = url
+        shareUrl = url
+        shareDesc = '点击进入播放'
+        shareTitle = '派发了一段语音'
 
         var $audio = $('<audio controls autoplay>')
           .attr('type', 'audio/mpeg')
