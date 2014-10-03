@@ -6,8 +6,8 @@
   function init() {
     var wxData = {
       //appId: '',
-      //imgUrl: '',
-      //link: url,
+      imgUrl: 'http://fritx.github.io/voice/logo.jpg',
+      link: 'http://fritx.github.io/voice',
       desc: '点击进入播放',
       title: '派发了一段语音'
     }
