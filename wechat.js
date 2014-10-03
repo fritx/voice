@@ -53,7 +53,7 @@
     var name = obj.name
       , direct = this.map.direct[name]
       //, data = obj.data
-      , getData = obj.data
+      , getData = obj.getData
       , callback = obj.callback;
 
     // 直接获取的情况
@@ -68,13 +68,11 @@
       return WeixinJSBridge.call(direct, callback);
     }
 
-    
-
     var that = this;
 
     // 当 WeixinJSBridge 存在则直接绑定事件
     WeixinJSBridge.on(this.map.events[name], function() {
-      var data = getData()
+      var data = getData() || {}
       data = this._data(data)
 
       // 分享到微博的接口不同
@@ -95,7 +93,7 @@
   };
 
   // 添加监听
-  Wechat.prototype.on = function(name, data, callback) {
+  Wechat.prototype.on = function(name, getData, callback) {
     if(!name) return;
     //if(typeof data === 'function') {
     //  callback = data;
@@ -105,7 +103,7 @@
     this._make({
       name: name,
       //data: data ? this._data(data) : {},
-      data: data ? data : {},
+      getData: getData || noop,
       callback: callback || noop
     });
 
