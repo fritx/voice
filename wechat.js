@@ -52,7 +52,8 @@
 
     var name = obj.name
       , direct = this.map.direct[name]
-      , data = obj.data
+      //, data = obj.data
+      , getData = obj.data
       , callback = obj.callback;
 
     // 直接获取的情况
@@ -67,23 +68,28 @@
       return WeixinJSBridge.call(direct, callback);
     }
 
-    // 分享到微博的接口不同
-    if(name === 'weibo') {
-      data.content = data.desc;
-      data.url = data.link;
-
-    // 朋友圈的 title 是不显示的，直接拼接
-    } else if(name === 'timeline') {
-      data.title = data.title + ' - ' + data.desc;
-
-      // Android 下有时候会需要 desc (*-.-)
-      data.desc = data.title;
-    }
+    
 
     var that = this;
 
     // 当 WeixinJSBridge 存在则直接绑定事件
     WeixinJSBridge.on(this.map.events[name], function() {
+      var data = getData()
+      data = this._data(data)
+
+      // 分享到微博的接口不同
+      if(name === 'weibo') {
+        data.content = data.desc;
+        data.url = data.link;
+
+      // 朋友圈的 title 是不显示的，直接拼接
+      } else if(name === 'timeline') {
+        data.title = data.title + ' - ' + data.desc;
+
+        // Android 下有时候会需要 desc (*-.-)
+        data.desc = data.title;
+      }
+
       WeixinJSBridge.invoke(that.map.actions[name], data, callback);
     });
   };
@@ -91,14 +97,15 @@
   // 添加监听
   Wechat.prototype.on = function(name, data, callback) {
     if(!name) return;
-    if(typeof data === 'function') {
-      callback = data;
-      data = null;
-    }
+    //if(typeof data === 'function') {
+    //  callback = data;
+    //  data = null;
+    //}
 
     this._make({
       name: name,
-      data: data ? this._data(data) : {},
+      //data: data ? this._data(data) : {},
+      data: data ? data : {},
       callback: callback || noop
     });
 

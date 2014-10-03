@@ -7,25 +7,21 @@
     var shareUrl = 'http://fritx.github.io/voice'
     var shareDesc = '将文字以语音的形式派发给朋友'
     var shareTitle = '语音派发'
-
-    var wxData = {
-      //appId: '',
-      img: 'http://fritx.github.io/voice/logo.jpg',
-      link: function(){
-        return shareUrl
-      },
-      desc: function(){
-        return shareDesc
-      },
-      title: function(){
-        return shareTitle
+    
+    var wxGetData = function(){
+      return {
+        //appId: '',
+        img: 'http://fritx.github.io/voice/logo.jpg',
+        link: shareUrl,
+        desc: shareDesc,
+        title: shareTitle
       }
     }
     var wxCallback = function(res){
-      alert(JSON.stringify(res))
+      //alert(JSON.stringify(res))
     }
-    wechat('friend', wxData, wxCallback)
-    wechat('timeline', wxData, wxCallback)
+    wechat('friend', wxGetData, wxCallback)
+    wechat('timeline', wxGetData, wxCallback)
 
     $(function(){
       var $form = $('#form-voice')
