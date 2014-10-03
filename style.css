@@ -1,0 +1,23 @@
+body {
+  max-width: 400px;
+  display: none;
+}
+body.ready {
+  display: block;
+}
+
+#input-text {
+  width: 100%;
+  height: 50px;
+}
+
+#output-link {
+  word-break: break-all;
+}
+
+#audio-box {
+  opacity: 0.8;
+}
+#audio-box.ready {
+  opacity: 1;
+}
