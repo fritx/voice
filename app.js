@@ -1,8 +1,19 @@
 (function(){
-  if ('WeixinJSBridge' in window) WeixinApi.ready(init)
-  else init()
+  //if ('WeixinJSBridge' in window) WeixinApi.ready(init)
+  //else init()
+  init()
 
-  function init(wxApi) {
+  function init() {
+    var wxData = {
+      //appId: '',
+      //imgUrl: '',
+      //link: url,
+      desc: '点击进入播放',
+      title: '派发了一段语音'
+    }
+    wechat('friend', wxData)
+    wechat('timeline', wxData)
+
     $(function(){
       var $form = $('#form-voice')
       var $text = $('#input-text')
@@ -22,6 +33,7 @@
         ].join('')
 
         $link.text(url)
+        wxData.link = url
 
         var $audio = $('<audio controls autoplay>')
           .attr('type', 'audio/mpeg')
@@ -30,14 +42,6 @@
           })
           .attr('src', url)
           .appendTo($audioBox)
-
-        wxApi && wxApi.shareToFriend({
-          //appId: '',
-          //imgUrl: '',
-          link: url,
-          desc: '点击进入播放',
-          title: '派发了一段语音'
-        })
       })
 
       $('body').addClass('ready')
